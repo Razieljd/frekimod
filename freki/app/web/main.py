@@ -43,6 +43,7 @@ from . import web
 @web.route("/")
 def index():
     """Renders the homepage."""
+    print("gol")
 
     return render_template("main/index.html",
                            last_submissions=Log.query.order_by(Log.sub_date.desc()).limit(10).all(),

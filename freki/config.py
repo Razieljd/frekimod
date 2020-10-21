@@ -22,8 +22,8 @@ from os import environ
 class Config(object):
     """Base config."""
 
-    DEBUG = False
-    TESTING = False
+    DEBUG = True
+    TESTING = True
 
     SECRET_KEY = environ.get("FREKI_SECRET_KEY")
     VT_MASTER_KEY = environ.get("FREKI_VT_MASTER_KEY")
@@ -39,7 +39,7 @@ class Config(object):
 class ProductionConfig(Config):
     """Production config."""
 
-    DEBUG = False
+    DEBUG = True
 
 class DevelopmentConfig(Config):
     """Development config."""

@@ -75,3 +75,11 @@ class Comment(Base, db.Model):
 
     submission = db.relationship("Submission", backref="comments")
     user = db.relationship("User", backref="comments")
+
+class RuleModel(Base, db.Model):
+    """Comment fields."""
+
+    __tablename__ = "rule"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(256), nullable=False)
+    rule = db.Column(db.String(4000), nullable=False)

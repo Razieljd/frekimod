@@ -53,6 +53,8 @@ api = Api(api_blueprint, version="1.1", title="Freki API", doc="/",
 ns_report = api.namespace("report", path="/",
                           description="Scan a new file or search for samples and reports.")
 ns_user = api.namespace("user", path="/user", description="User options.")
+ns_api = api.namespace("rule", path="/rule", description="rules options")
+ns_analyze = api.namespace("analyze", path="/analyze", description="rules options")
 ns_general = api.namespace("general", path="/", description="General information about samples.")
 ns_pe = api.namespace("pe", description="Portable Executable (PE) operations.")
 
@@ -94,3 +96,5 @@ from . import general
 from . import pe
 from . import user
 from . import report
+from . import rule
+from . import analyze

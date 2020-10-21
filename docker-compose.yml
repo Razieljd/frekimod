@@ -6,7 +6,7 @@ services:
     build: ./freki
     container_name: freki
     restart: always
-    command: bash -c "/freki/wait_for_mysql.sh && gunicorn -w 5 --timeout 300 -b :8000 run:app"
+    command: bash -c "sed -i 's/\r//' /freki/wait_for_mysql.sh && /freki/wait_for_mysql.sh && gunicorn -w 5 --timeout 300 -b :8000 run:app"
     expose:
       - 8000
     depends_on:
