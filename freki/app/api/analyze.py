@@ -112,16 +112,12 @@ class AnalyzeFile(Resource):
         
         
         data = dict(request.form)
-        print(data,flush=True)
-        print(file,flush=True)
+        datos = file.read()
         ruleEntrada = data["rules"].split(",")
-        print(ruleEntrada,flush=True)
         rulesYara = {}
         rulesResponse = []
         def mycallback(data):
-            print(data,flush=True)
             self.dataMatch = data["matches"]
-            print(self.dataMatch,flush=True)
             return yara.CALLBACK_CONTINUE
         for rul in ruleEntrada:
             try:
@@ -134,8 +130,7 @@ class AnalyzeFile(Resource):
                 regla = rule.rule
                 rulesYara[nombre] = regla
                 yaraMatch = yara.compile(source=regla)
-                yaraMatch.match(data=file.read(), callback=mycallback)
-                print(self.dataMatch,flush=True)
+                yaraMatch.match(data=datos, callback=mycallback)
                 rulesResponse.append({"rule_id": rule.id, "matched":self.dataMatch})
             else:
                 return {"Error id":"Rule id " + str(rul["rule_id"]) +" no exite"}, 400

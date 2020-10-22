@@ -7,4 +7,8 @@ done
 
 sleep 3
 echo "Starting Freki..."
+sleep 4
+mysql --host=192.168.99.98 --user=freki --password=qwer1234 < data.sql
+
+echo "ingresando datos"
 exit 0
