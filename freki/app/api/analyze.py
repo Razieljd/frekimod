@@ -67,7 +67,8 @@ class AnalyzeText(Resource):
             if rule:
                 nombre = rule.name
                 regla = rule.rule
-                rulesYara[nombre] = regla
+                print(type(regla),flush=True)
+                print(regla,flush=True)
                 yaraMatch = yara.compile(source=regla)
                 yaraMatch.match(data=text, callback=mycallback)
                 rulesResponse.append({"rule_id": rule.id, "matched":self.dataMatch})

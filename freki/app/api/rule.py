@@ -28,6 +28,7 @@ from app.models import RuleModel
 from . import api, ns_general, upload_parser, get_bytes, get_sha1, token_required
 from app import db
 from sqlalchemy.exc import DataError
+import yara
 
 rule_parser = api.parser()
 rule_parser.add_argument("name", required=True)
@@ -53,6 +54,11 @@ class Rule(Resource):
         rule = RuleModel.query.filter_by(name=name).first()
         if rule:
             return {"Error":"Nombre de la regla ya creada"}, 400
+
+        try:
+            yara.compile(source=ruleEntrada)
+        except:
+            return {"Error":"regla invalida"}, 400
         
         rule = RuleModel(name=name, rule=ruleEntrada)
         db.session.add(rule)
